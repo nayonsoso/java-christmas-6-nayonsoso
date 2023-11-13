@@ -27,11 +27,17 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printPriceBeforeDiscount(){
+    public void printPriceBeforeDiscount(int price){
         System.out.println(PRICE_BEFORE_DISCOUNT_MESSAGE);
+        printMoney(price);
     }
 
-    public void printMoney(int money){
+    public void printGiftMenu(){
+        System.out.println(GIFT_MENU_MESSAGE);
+        System.out.printf(MENU_QUANTITY, GIFT_MENU, GIFT_MENU_QUANTITY);
+    }
+
+    private void printMoney(int money){
         System.out.println(formatWithCommas(money));
     }
 
