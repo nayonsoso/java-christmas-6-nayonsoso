@@ -39,4 +39,16 @@ public class ReservationDate {
         SpecialEventDate specialEventDate = new SpecialEventDate();
         return specialEventDate.contains(date);
     }
+
+    public boolean getIsDuringDDayEvent(){
+        return this.isDuringDDayEvent;
+    }
+
+    public boolean getIsWeekend(){
+        return this.isWeekend;
+    }
+
+    public boolean getIsDuringSpecialEvent(){
+        return this.isDuringSpecialEvent;
+    }
 }
