@@ -17,59 +17,59 @@ public class OutputView {
     private static final String PRICE_AFTER_DISCOUNT_MESSAGE = "<할인 후 예상 결제 금액>";
     private static final String EVENT_BADGE_MESSAGE = "<12월 이벤트 배지>";
 
-    public void printEventPreview(int date){
+    public static void printEventPreview(int date){
         System.out.printf(EVENT_PREVIEW_MESSAGE, date);
         System.out.println();
     }
 
-    public void printMenuStart() {
+    public static void printMenuStart() {
         System.out.println();
         System.out.println(MENU_START_MESSAGE);
     }
 
-    public void printMenu(String menu, Integer quantity) {
+    public static void printMenu(String menu, Integer quantity) {
         System.out.printf(MENU_QUANTITY, menu, quantity);
         System.out.println();
     }
 
-    public void printPriceBeforeDiscount(int price){
+    public static void printPriceBeforeDiscount(int price){
         System.out.println();
         System.out.println(PRICE_BEFORE_DISCOUNT_MESSAGE);
         System.out.println(formatWithCommas(price));
     }
 
-    public void printGiftMenu(){
+    public static void printGiftMenu(){
         System.out.println();
         System.out.println(GIFT_MENU_MESSAGE);
         System.out.printf(MENU_QUANTITY, GIFT_MENU, GIFT_MENU_QUANTITY);
     }
 
-    public void printBenefitList(String event, int discount){
+    public static void printBenefitList(String event, int discount){
         System.out.println(BENEFIT_LIST_MESSAGE);
         System.out.printf(BENEFIT, event, formatMinusWithCommas(discount));
     }
 
-    public void printTotalBenefit(int totalBenefit){
+    public static void printTotalBenefit(int totalBenefit){
         System.out.println(TOTAL_BENEFIT_AMOUNT_MESSAGE);
         System.out.println(formatMinusWithCommas(totalBenefit));
     }
 
-    public void printAfterDiscount(int priceAfterDiscount){
+    public static void printAfterDiscount(int priceAfterDiscount){
         System.out.println(PRICE_AFTER_DISCOUNT_MESSAGE);
         System.out.println(formatWithCommas(priceAfterDiscount));
     }
 
-    public void printEventBadge(String badge){
+    public static void printEventBadge(String badge){
         System.out.println(EVENT_BADGE_MESSAGE);
         System.out.println(badge);
     }
 
-    private String formatWithCommas(int money){
+    private static String formatWithCommas(int money){
         DecimalFormat df = new DecimalFormat("###,###원");
         return df.format(money);
     }
 
-    private String formatMinusWithCommas(int money){
+    private static String formatMinusWithCommas(int money){
         DecimalFormat df = new DecimalFormat("-###,###원");
         return df.format(money);
     }
