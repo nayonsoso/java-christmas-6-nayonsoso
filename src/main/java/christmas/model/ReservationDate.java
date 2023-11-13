@@ -14,8 +14,9 @@ public class ReservationDate {
 
     ReservationDate(int date){
         validate(date);
-        this.isWeekend = checkWeekend(date);
         this.isDuringDDayEvent = checkDuringDDayEvent(date);
+        this.isWeekend = checkWeekend(date);
+        this.isDuringSpecialEvent = checkDuringSpecialEvent(date);
         this.date = date;
     }
 
@@ -25,12 +26,17 @@ public class ReservationDate {
         }
     }
 
+    private boolean checkDuringDDayEvent(int date){
+        return date >= Constants.D_DAY_START_DATE && date <= Constants.D_DAY_END_DATE;
+    }
+
     private boolean checkWeekend(int date){
         DayOfWeek dayOfWeek = LocalDate.of(Constants.YEAR, Constants.MONTH, date).getDayOfWeek();
         return dayOfWeek == DayOfWeek.FRIDAY || dayOfWeek == DayOfWeek.SATURDAY;
     }
 
-    private boolean checkDuringDDayEvent(int date){
-        return date >= Constants.D_DAY_START_DATE && date <= Constants.D_DAY_END_DATE;
+    private boolean checkDuringSpecialEvent(int date){
+        SpecialEventDate specialEventDate = new SpecialEventDate();
+        return specialEventDate.contains(date);
     }
 }
