@@ -31,4 +31,12 @@ public class OutputView {
         System.out.println(PRICE_BEFORE_DISCOUNT_MESSAGE);
     }
 
+    public void printMoney(int money){
+        System.out.println(formatWithCommas(money));
+    }
+
+    private String formatWithCommas(int money){
+        DecimalFormat df = new DecimalFormat("###,###원");
+        return df.format(money);
+    }
 }
