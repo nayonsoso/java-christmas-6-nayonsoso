@@ -1,9 +1,9 @@
 package christmas.view;
 
 import christmas.constants.Constants;
+import christmas.constants.ErrorMessage;
 
 import java.text.DecimalFormat;
-import java.util.EnumMap;
 
 public class OutputView {
     private static final String EVENT_PREVIEW_MESSAGE = "%d월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
@@ -64,6 +64,10 @@ public class OutputView {
     public static void printEventBadge(String badge) {
         System.out.printf(EVENT_BADGE_MESSAGE, Constants.MONTH);
         System.out.println(badge);
+    }
+
+    public static void printError(String message){
+        System.out.println(ErrorMessage.ERROR_PREFIX + message);
     }
 
     private static String formatWithCommas(int money) {
