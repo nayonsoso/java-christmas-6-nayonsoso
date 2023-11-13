@@ -8,13 +8,14 @@ import java.time.LocalDate;
 
 public class ReservationDate {
     private final int date;
+    private final boolean isDuringDDayEvent;
     private final boolean isWeekend;
-    private final int date;
-    private final int date;
+    private final boolean isDuringSpecialEvent;
 
     ReservationDate(int date){
         validate(date);
         this.isWeekend = checkWeekend(date);
+        this.isDuringDDayEvent = checkDuringDDayEvent(date);
         this.date = date;
     }
 
@@ -27,5 +28,9 @@ public class ReservationDate {
     private boolean checkWeekend(int date){
         DayOfWeek dayOfWeek = LocalDate.of(Constants.YEAR, Constants.MONTH, date).getDayOfWeek();
         return dayOfWeek == DayOfWeek.FRIDAY || dayOfWeek == DayOfWeek.SATURDAY;
+    }
+
+    private boolean checkDuringDDayEvent(int date){
+        return date >= Constants.D_DAY_START_DATE && date <= Constants.D_DAY_END_DATE;
     }
 }
