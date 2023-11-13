@@ -27,9 +27,18 @@ class OutputViewTest {
     @Test
     @DisplayName("주어진 정수를 세 자리마다 쉼표를 찍어 출력한다.")
     void printMoneyTest() {
-        int money = 1234567;
+        int money = 1234567890;
         OutputView outputView = new OutputView();
-        outputView.printMoney(money);
-        assertThat(output.toString()).contains("1,234,567원");
+        outputView.printPriceBeforeDiscount(money);
+        assertThat(output.toString()).contains("1,234,567,890원");
+    }
+
+    @Test
+    @DisplayName("주어진 정수를 세 자리마다 쉼표를 찍어 출력하며, 맨 앞에 -를 붙인다.")
+    void printMinusMoneyTest() {
+        int money = 1234567890;
+        OutputView outputView = new OutputView();
+        outputView.printTotalBenefit(money);
+        assertThat(output.toString()).contains("-1,234,567,890원");
     }
 }
