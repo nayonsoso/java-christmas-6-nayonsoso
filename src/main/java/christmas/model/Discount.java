@@ -34,7 +34,7 @@ public class Discount {
     }
 
     private void addWeekdayDiscount(ReservationDate reservationDate, Orders orders) {
-        if (!reservationDate.getIsWeekend()) {
+        if (!reservationDate.getIsWeekend() && orders.countDesserts() != 0) {
             int weekdayDiscount = calculateWeekDayDiscount(orders);
             this.discount.put(EventType.WEEKDAY, weekdayDiscount);
         }
@@ -45,7 +45,7 @@ public class Discount {
     }
 
     private void addWeekendDiscount(ReservationDate reservationDate, Orders orders) {
-        if (reservationDate.getIsWeekend()) {
+        if (reservationDate.getIsWeekend() && orders.countMains() != 0) {
             int weekendDiscount = calculateWeekendDiscount(orders);
             this.discount.put(EventType.WEEKEND, weekendDiscount);
         }
@@ -69,5 +69,9 @@ public class Discount {
 
     public EnumMap<EventType, Integer> getDiscount(){
         return this.discount;
+    }
+
+    public int getTotalDiscount(){
+        return this.discount.values().stream().mapToInt(Integer::intValue).sum();
     }
 }
