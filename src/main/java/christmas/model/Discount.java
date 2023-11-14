@@ -13,6 +13,7 @@ public class Discount {
             addChristmasDiscount(reservationDate);
             addWeekdayDiscount(reservationDate, orders);
             addWeekendDiscount(reservationDate, orders);
+            addSpecialDiscount(reservationDate);
         }
     }
 
@@ -51,5 +52,11 @@ public class Discount {
 
     private int calculateWeekendDiscount(Orders orders){
         return orders.countMains() * Constants.YEAR;
+    }
+
+    private void addSpecialDiscount(ReservationDate reservationDate){
+        if(reservationDate.getIsDuringSpecialEvent()){
+            this.discount.put(EventType.SPECIAL, Constants.SPECIAL_DISCOUNT);
+        }
     }
 }
