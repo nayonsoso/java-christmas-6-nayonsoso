@@ -1,6 +1,7 @@
 package christmas.model;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 public enum Menu {
     MUSHROOM_SOUP("양송이수프", 6_000, false),
@@ -23,28 +24,27 @@ public enum Menu {
     private final int price;
     private final boolean isDrink;
 
-    Menu(String name, int price, boolean isDrink){
+    Menu(String name, int price, boolean isDrink) {
         this.name = name;
         this.price = price;
         this.isDrink = isDrink;
     }
 
-    public String getName(){
+    public static Optional<Menu> findByName(String input) {
+        return Arrays.stream(values())
+                .filter(menu -> input.equals(menu.getName()))
+                .findFirst();
+    }
+
+    public String getName() {
         return name;
     }
 
-    public int getPrice(){
+    public int getPrice() {
         return this.price;
     }
 
-    public boolean isDrink(){
+    public boolean isDrink() {
         return isDrink;
-    }
-
-    public static Menu findByName(String input){
-        return Arrays.stream(values())
-                .filter(menu -> input.equals(menu.getName()))
-                .findFirst()
-                .orElse(null);
     }
 }
