@@ -47,4 +47,12 @@ public enum Menu {
     public boolean isDrink() {
         return this.menuType == MenuType.DRINK;
     }
+
+    public boolean isDessert() {
+        return this.menuType == MenuType.DESSERT;
+    }
+
+    public boolean isMain() {
+        return this.menuType == MenuType.MAIN;
+    }
 }
