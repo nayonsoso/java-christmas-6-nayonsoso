@@ -2,8 +2,7 @@ package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import christmas.constants.Constants;
-
-import static christmas.constants.ErrorMessage.INVALID_DATE_ERROR;
+import christmas.constants.ErrorMessage;
 
 public class InputView {
     private static final String START_MESSAGE = "안녕하세요! 우테코 식당 %d월 이벤트 플래너입니다.";
@@ -20,7 +19,7 @@ public class InputView {
         return Integer.parseInt(inputDate);
     }
 
-    public static String readMenu() {
+    public static String readOrder() {
         System.out.print(REQUEST_MENU);
         return Console.readLine();
     }
@@ -29,7 +28,7 @@ public class InputView {
         try {
             Integer.parseInt(inputDate);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(INVALID_DATE_ERROR);
+            throw new IllegalArgumentException(ErrorMessage.INVALID_DATE_ERROR);
         }
     }
 }
