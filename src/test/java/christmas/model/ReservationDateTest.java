@@ -9,6 +9,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ReservationDateTest {
+    @DisplayName("날짜 저장 정상 작동 테스트")
+    @ValueSource(ints = {1,15,31})
+    @ParameterizedTest
+    void reservationDateTest(int date) {
+        ReservationDate reservationDate = new ReservationDate(date);
+        assertThat(reservationDate.getDate()).isEqualTo(date);
+    }
+
     @DisplayName("날짜 범위를 벗어난 경우 에러 발생")
     @ValueSource(ints = {-1, 0, 32})
     @ParameterizedTest
