@@ -66,4 +66,8 @@ public class Discount {
             this.discount.put(EventType.GIFT, Menu.getGiftMenuPrice());
         }
     }
+
+    public EnumMap<EventType, Integer> getDiscount(){
+        return this.discount;
+    }
 }
