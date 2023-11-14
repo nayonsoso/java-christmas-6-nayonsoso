@@ -1,5 +1,7 @@
 package christmas.model;
 
+import java.util.Arrays;
+
 public enum Menu {
     MUSHROOM_SOUP("양송이수프", 6_000, false),
     TAPAS("타파스", 5_500, false),
@@ -37,5 +39,12 @@ public enum Menu {
 
     public boolean isDrink(){
         return isDrink;
+    }
+
+    public static Menu findByName(String input){
+        return Arrays.stream(values())
+                .filter(menu -> input.equals(menu.getName()))
+                .findFirst()
+                .orElse(null);
     }
 }
