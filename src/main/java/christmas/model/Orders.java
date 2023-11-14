@@ -55,4 +55,26 @@ public class Orders {
             throw new IllegalArgumentException(INVALID_ORDER_ERROR);
         }
     }
+
+    private void validateOrders(EnumMap<Menu, Integer> orders){
+        validateNotOnlyDrink(orders);
+        validateTotalQuantity(orders);
+    }
+
+    private void validateNotOnlyDrink(EnumMap<Menu, Integer> orders) {
+        if (orders.keySet().stream().noneMatch(Menu::isDrink)) {
+            throw new IllegalArgumentException(INVALID_ORDER_ERROR);
+        }
+    }
+
+    private void validateTotalQuantity(EnumMap<Menu, Integer> orders){
+        int sum = calculateTotalQuantity(orders);
+        if(sum< Constants.MAX_ORDER_QUANTITY) {
+            throw new IllegalArgumentException(INVALID_ORDER_ERROR);
+        }
+    }
+
+    private int calculateTotalQuantity(EnumMap<Menu, Integer> orders){
+        return orders.values().stream().mapToInt(Integer::intValue).sum();
+    }
 }
