@@ -34,7 +34,7 @@ public class Orders {
         for(String order : splitOrder) {
             Menu menu = getMenu(order.split("-")[0]);
             int quantity = getQuantity(order.split("-")[1]);
-            validateNoDuplicate(menu);
+            validateNoDuplicate(orders, menu);
             orders.put(menu, quantity);
         }
         return orders;
@@ -57,7 +57,7 @@ public class Orders {
         return quantity;
     }
 
-    private void validateNoDuplicate(Menu menu){
+    private void validateNoDuplicate(EnumMap<Menu, Integer> orders, Menu menu){
         if(orders.get(menu) == null){
             throw new IllegalArgumentException(INVALID_ORDER_ERROR);
         }
