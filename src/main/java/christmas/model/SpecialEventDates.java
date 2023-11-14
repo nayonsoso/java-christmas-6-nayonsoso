@@ -7,11 +7,11 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SpecialEventDate {
+public class SpecialEventDates {
 
     private final Set<Integer> specialDates = new HashSet<>();
 
-    SpecialEventDate() {
+    SpecialEventDates() {
         int sunday = findFirstSunday();
         while (sunday <= Constants.MONTH_END_DATE) {
             specialDates.add(sunday);
