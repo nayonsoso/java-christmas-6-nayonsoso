@@ -9,7 +9,11 @@ public class Constants {
 
     public static final int D_DAY_START_DATE = 1;
     public static final int D_DAY_END_DATE = 25;
+    public static final int D_DAY_START_DISCOUNT = 1000;
+    public static final int D_DAY_ACCUMULATED_DISCOUNT = 1000;
 
     public static final int MIN_ORDER_QUANTITY = 1;
     public static final int MAX_ORDER_QUANTITY = 20;
+
+    public static final int MIN_PAYMENT_TO_DISCOUNT = 10_000;
 }
