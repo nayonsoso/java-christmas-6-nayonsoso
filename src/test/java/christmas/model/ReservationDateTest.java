@@ -18,7 +18,7 @@ class ReservationDateTest {
                 .hasMessage(ErrorMessage.INVALID_DATE_ERROR);
     }
 
-    @DisplayName("크리스마스 디데이 이벤트 해당시 IsDuringDDayEvent true 리턴 테스트")
+    @DisplayName("크리스마스 디데이 이벤트 해당시 IsDuringDDayEvent 에 true 저장됨")
     @ValueSource(ints = {1, 10, 25})
     @ParameterizedTest
     void checkDuringDDayEventTestExpectingTrue(int date) {
@@ -26,7 +26,7 @@ class ReservationDateTest {
         assertThat(reservationDate.getIsDuringDDayEvent()).isTrue();
     }
 
-    @DisplayName("크리스마스 디데이 이벤트 해당되지 않을시 IsDuringDDayEvent false 리턴 테스트")
+    @DisplayName("크리스마스 디데이 이벤트 해당되지 않을시 IsDuringDDayEvent 에 false 저장됨")
     @ValueSource(ints = {26, 29, 31})
     @ParameterizedTest
     void checkDuringDDayEventTestExpectingFalse(int date) {
@@ -34,7 +34,7 @@ class ReservationDateTest {
         assertThat(reservationDate.getIsDuringDDayEvent()).isFalse();
     }
 
-    @DisplayName("주말일 경우 IsWeekend true 리턴 테스트")
+    @DisplayName("주말일 경우 IsWeekend 에 true 저장됨")
     @ValueSource(ints = {1, 2, 8, 9, 15, 16, 22, 23, 29, 30})
     @ParameterizedTest
     void checkWeekendTestExpectingTrue(int date) {
@@ -42,7 +42,7 @@ class ReservationDateTest {
         assertThat(reservationDate.getIsWeekend()).isTrue();
     }
 
-    @DisplayName("주말 아닐 경우 IsWeekend false 리턴 테스트")
+    @DisplayName("주말 아닐 경우 IsWeekend 에 false 저장됨")
     @ValueSource(ints = {3, 7, 10})
     @ParameterizedTest
     void checkWeekendTestExpectingFalse(int date) {
