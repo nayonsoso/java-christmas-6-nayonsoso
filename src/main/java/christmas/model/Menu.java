@@ -55,4 +55,12 @@ public enum Menu {
     public boolean isMain() {
         return this.menuType == MenuType.MAIN;
     }
+
+    public static int getGiftMenuPrice(){
+        return CHAMPAGNE.price;
+    }
+
+    public static String getGiftMenuName(){
+        return CHAMPAGNE.name;
+    }
 }

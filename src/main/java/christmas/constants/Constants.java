@@ -2,7 +2,7 @@ package christmas.constants;
 
 public class Constants {
     // Date
-    public static final int YEAR = 2023;
+    public static final int YEAR = 2_023;
     public static final int MONTH = 12;
 
     // Month range
@@ -22,4 +22,7 @@ public class Constants {
     // Discount
     public static final int MIN_PAYMENT_TO_DISCOUNT = 10_000;
     public static final int SPECIAL_DISCOUNT = 1_000;
+
+    // Gift
+    public static final int MIN_PAYMENT_TO_GET_GIFT = 120_000;
 }
