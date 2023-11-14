@@ -3,28 +3,49 @@ package christmas.model;
 import christmas.constants.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class OrdersTest {
-    @DisplayName("잘못된 형식의 주문 들어올 경우 에러 발생")
-    @ValueSource(strings = {"가", "-1", "가-1,", "가--1", "가-1,나-"})
-    @ParameterizedTest
-    void validateFormatTest(String userInput) {
+    static Stream<Arguments> invalidOrders() throws Throwable {
+        return Stream.of(
+                Arguments.of("메뉴만", "양송이수프"),
+                Arguments.of("숫자만", "-1"),
+                Arguments.of("쉼표로 끝남", "양송이수프-1,"),
+                Arguments.of("메뉴판에 없는 주문", "양송이수프프-하나"),
+                Arguments.of("최소 주문 수 미만 주문", "양송이수프-0"),
+                Arguments.of("중복된 주문", "양송이스프-1, 양송이수프-2"),
+                Arguments.of("음료만 주문", "제로콜라-1, 레드와인-2"),
+                Arguments.of("최대 주문 수 초과 주문", "양송이수프-20, 레드와인-1")
+        );
+    }
+
+    static Stream<Arguments> validOrders() throws Throwable {
+        return Stream.of(
+                Arguments.of("하나만", "양송이수프-10"),
+                Arguments.of("둘 이상", "양송이수프-2, 레드와인-1"),
+                Arguments.of("최소 주문", "양송이수프-1"),
+                Arguments.of("최대 주문", "양송이수프-19, 레드와인-1")
+        );
+    }
+
+    @DisplayName("주문 유효성검사 에러 처리 테스트")
+    @ParameterizedTest(name = "주문 유형 : {0}")
+    @MethodSource("invalidOrders")
+    void validateOrderExceptionTest(String type, String userInput) {
         assertThatThrownBy(() -> new Orders(userInput))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.INVALID_ORDER_ERROR);
     }
 
-
-    @DisplayName("메뉴판에 없는 주문 들어올 경우 에러 발생")
-    @ValueSource(strings = {"양송이스푸-1", "크리스마스파스타-2, 시저샐러두-1"})
-    @ParameterizedTest
-    void validateExistingMenuTest(String userInput) {
-        assertThatThrownBy(() -> new Orders(userInput))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.INVALID_ORDER_ERROR);
+    @DisplayName("주문 유효성검사 정상 작동 테스트")
+    @ParameterizedTest(name = "주문 유형 : {0}")
+    @MethodSource("validOrders")
+    void validateOrderTest(String type, String userInput) {
+        Orders orders = new Orders(userInput);
     }
 }
