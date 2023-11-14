@@ -2,12 +2,15 @@ package christmas.model;
 
 import christmas.constants.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Set;
 import java.util.stream.Stream;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class OrdersTest {
@@ -47,5 +50,19 @@ class OrdersTest {
     @MethodSource("validOrders")
     void validateOrderTest(String type, String userInput) {
         Orders orders = new Orders(userInput);
+    }
+
+
+    @DisplayName("주문 내용 저장 정상 작동 테스트")
+    @Test
+    void orderTest() {
+        String userInput = "양송이수프-1, 티본스테이크-2, 초코케이크-3, 레드와인-4";
+        Set<Menu> menus = Set.of(Menu.MUSHROOM_SOUP, Menu.T_BONE_STEAK, Menu.CHOCOLATE_CAKE, Menu.RED_WINE);
+        int totalPrice = Menu.MUSHROOM_SOUP.getPrice() + Menu.T_BONE_STEAK.getPrice() * 2
+                + Menu.CHOCOLATE_CAKE.getPrice() * 3 + Menu.RED_WINE.getPrice() * 4;
+
+        Orders orders = new Orders(userInput);
+        assertThat(orders.getOrders().keySet()).containsExactlyInAnyOrderElementsOf(menus);
+        assertThat(orders.getTotalPrice()).isEqualTo(totalPrice);
     }
 }

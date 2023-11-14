@@ -88,4 +88,12 @@ public class Orders {
     public EnumMap<Menu, Integer> getOrders() {
         return this.orders;
     }
+
+    public int getTotalPrice(){
+        int sum = 0;
+        for(Menu menu : this.orders.keySet()){
+            sum += menu.getPrice() * this.orders.get(menu);
+        }
+        return sum;
+    }
 }
