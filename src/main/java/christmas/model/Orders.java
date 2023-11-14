@@ -98,14 +98,18 @@ public class Orders {
     }
 
     public int countDesserts() {
-        return (int) this.orders.keySet().stream()
+        return this.orders.keySet().stream()
                 .filter(Menu::isDessert)
-                .count();
+                .map(e -> this.orders.get(e))
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
     public int countMains() {
-        return (int) this.orders.keySet().stream()
+        return this.orders.keySet().stream()
                 .filter(Menu::isMain)
-                .count();
+                .map(e -> this.orders.get(e))
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 }

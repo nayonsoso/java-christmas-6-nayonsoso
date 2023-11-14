@@ -53,16 +53,42 @@ class OrdersTest {
     }
 
 
-    @DisplayName("주문 내용 저장 정상 작동 테스트")
+    @DisplayName("주문 정보 저장 테스트")
     @Test
     void orderTest() {
         String userInput = "양송이수프-1, 티본스테이크-2, 초코케이크-3, 레드와인-4";
         Set<Menu> menus = Set.of(Menu.MUSHROOM_SOUP, Menu.T_BONE_STEAK, Menu.CHOCOLATE_CAKE, Menu.RED_WINE);
-        int totalPrice = Menu.MUSHROOM_SOUP.getPrice() + Menu.T_BONE_STEAK.getPrice() * 2
-                + Menu.CHOCOLATE_CAKE.getPrice() * 3 + Menu.RED_WINE.getPrice() * 4;
-
         Orders orders = new Orders(userInput);
         assertThat(orders.getOrders().keySet()).containsExactlyInAnyOrderElementsOf(menus);
+        assertThat(orders.getOrders().get(Menu.MUSHROOM_SOUP)).isEqualTo(1);
+        assertThat(orders.getOrders().get(Menu.T_BONE_STEAK)).isEqualTo(2);
+        assertThat(orders.getOrders().get(Menu.CHOCOLATE_CAKE)).isEqualTo(3);
+        assertThat(orders.getOrders().get(Menu.RED_WINE)).isEqualTo(4);
+    }
+
+    @DisplayName("전체 가격 계산 테스트")
+    @Test
+    void getTotalPriceTest() {
+        String userInput = "양송이수프-1, 티본스테이크-2, 초코케이크-3, 레드와인-4";
+        int totalPrice = Menu.MUSHROOM_SOUP.getPrice() + Menu.T_BONE_STEAK.getPrice() * 2
+                + Menu.CHOCOLATE_CAKE.getPrice() * 3 + Menu.RED_WINE.getPrice() * 4;
+        Orders orders = new Orders(userInput);
         assertThat(orders.getTotalPrice()).isEqualTo(totalPrice);
+    }
+
+    @DisplayName("디저트 수 계산 테스트")
+    @Test
+    void countDessertTest() {
+        String userInput = "티본스테이크-2, 초코케이크-3, 아이스크림-4";
+        Orders orders = new Orders(userInput);
+        assertThat(orders.countDesserts()).isEqualTo(7);
+    }
+
+    @DisplayName("메인디쉬 수 계산 테스트")
+    @Test
+    void countMainTest() {
+        String userInput = "티본스테이크-2, 바비큐립-3, 해산물파스타-4";
+        Orders orders = new Orders(userInput);
+        assertThat(orders.countMains()).isEqualTo(9);
     }
 }
