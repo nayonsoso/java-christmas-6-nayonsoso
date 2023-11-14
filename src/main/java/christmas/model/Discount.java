@@ -11,6 +11,7 @@ public class Discount {
         this.discount = new EnumMap<>(EventType.class);
         if (checkPossibleToDiscount(orders)) {
             addChristmasDiscount(reservationDate);
+            addWeekdayDiscount(reservationDate, orders);
         }
     }
 
@@ -20,12 +21,23 @@ public class Discount {
 
     private void addChristmasDiscount(ReservationDate reservationDate) {
         if (reservationDate.getIsDuringDDayEvent()) {
-            int christmasDiscount = calculateChristmasDiscount(reservationDate.getDate();
+            int christmasDiscount = calculateChristmasDiscount(reservationDate.getDate());
             this.discount.put(EventType.CHRISTMAS_D_DAY, christmasDiscount);
         }
     }
 
     private int calculateChristmasDiscount(int date) {
         return (date - 1) * Constants.D_DAY_ACCUMULATED_DISCOUNT + Constants.D_DAY_START_DISCOUNT;
+    }
+
+    private void addWeekdayDiscount(ReservationDate reservationDate, Orders orders){
+        if(!reservationDate.getIsWeekend()){
+            int weekdayDiscount = calculateWeekDayDiscount(orders);
+            this.discount.put(EventType.WEEKDAY, weekdayDiscount);
+        }
+    }
+
+    private int calculateWeekDayDiscount(Orders orders){
+        return orders.countDesserts() * Constants.YEAR;
     }
 }
