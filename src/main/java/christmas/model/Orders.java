@@ -1,5 +1,7 @@
 package christmas.model;
 
+import christmas.constants.Constants;
+
 import java.util.EnumMap;
 
 import static christmas.constants.ErrorMessage.INVALID_ORDER_ERROR;
@@ -17,5 +19,40 @@ public class Orders {
 
     private String removeWhiteSpace(String userInput) {
         return userInput.replace(" ", "");
+    }
+
+    private EnumMap<Menu, Integer> initOrder(String userInput){
+        String[] splitOrder = splitOrder(userInput);
+        EnumMap<Menu, Integer> orders = new EnumMap<>(Menu.class);
+        for(String order : splitOrder) {
+            Menu menu = getMenu(order.split("-")[0]);
+            int quantity = getQuantity(order.split("-")[1]);
+            validateNoDuplicate(menu);
+            orders.put(menu, quantity);
+        }
+        return orders;
+    }
+
+    private String[] splitOrder(String inputOrder) {
+        return inputOrder.split(",");
+    }
+
+    private Menu getMenu(String menuInput) {
+        return Menu.findByName(menuInput)
+                .orElseThrow(() -> new IllegalArgumentException(INVALID_ORDER_ERROR));
+    }
+
+    private int getQuantity(String quantityInput) {
+        int quantity = Integer.parseInt(quantityInput);
+        if (quantity < Constants.MIN_ORDER_QUANTITY) {
+            throw new IllegalArgumentException(INVALID_ORDER_ERROR);
+        }
+        return quantity;
+    }
+
+    private void validateNoDuplicate(Menu menu){
+        if(orders.get(menu) == null){
+            throw new IllegalArgumentException(INVALID_ORDER_ERROR);
+        }
     }
 }
