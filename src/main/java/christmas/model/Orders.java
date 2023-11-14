@@ -87,13 +87,25 @@ public class Orders {
 
     public EnumMap<Menu, Integer> getOrders() {
         return this.orders;
-    }
+    } //TODO: 이거 없애기
 
-    public int getTotalPrice(){
+    public int getTotalPrice() {
         int sum = 0;
-        for(Menu menu : this.orders.keySet()){
+        for (Menu menu : this.orders.keySet()) {
             sum += menu.getPrice() * this.orders.get(menu);
         }
         return sum;
+    }
+
+    public int countDesserts() {
+        return (int) this.orders.keySet().stream()
+                .filter(Menu::isDessert)
+                .count();
+    }
+
+    public int countMains() {
+        return (int) this.orders.keySet().stream()
+                .filter(Menu::isMain)
+                .count();
     }
 }
