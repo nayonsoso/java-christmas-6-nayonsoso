@@ -9,6 +9,13 @@ import static christmas.constants.ErrorMessage.INVALID_ORDER_ERROR;
 public class Orders {
     EnumMap<Menu, Integer> orders;
 
+    public Orders(String userInput) {
+        validateFormat(userInput);
+        EnumMap<Menu, Integer> orders = initOrder(userInput);
+        validateOrders(orders);
+        this.orders = orders;
+    }
+
     private void validateFormat(String inputOrder) {
         String input = removeWhiteSpace(inputOrder);
         String regex = "^[가-힣]+(-\\d+)(,[가-힣]+(-\\d+))*$";
