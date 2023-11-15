@@ -63,7 +63,7 @@ public class Discount {
 
     private void addGiftDiscount(Orders orders) {
         if (orders.getTotalPrice() >= Constants.MIN_PAYMENT_TO_GET_GIFT) {
-            this.discount.put(EventType.GIFT, Menu.getGiftMenuPrice());
+            this.discount.put(EventType.GIFT, Menu.getGiftMenuPrice() * Menu.getGiftMenuQuantity());
         }
     }
 
@@ -76,7 +76,8 @@ public class Discount {
     }
 
     public int getTotalDiscount(){
-        return this.discount.values().stream().mapToInt(Integer::intValue).sum() - Menu.getGiftMenuPrice();
+        return this.discount.values().stream().mapToInt(Integer::intValue).sum()
+                - Menu.getGiftMenuPrice() * Menu.getGiftMenuQuantity();
     }
 
     public boolean checkAnyEventIncluded(){
