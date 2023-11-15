@@ -8,15 +8,9 @@ import java.time.LocalDate;
 
 public class ReservationDate {
     private final int date;
-    private final boolean isDuringDDayEvent;
-    private final boolean isWeekend;
-    private final boolean isDuringSpecialEvent;
 
     public ReservationDate(int date) {
         validate(date);
-        this.isDuringDDayEvent = checkDuringDDayEvent(date);
-        this.isWeekend = checkWeekend(date);
-        this.isDuringSpecialEvent = checkDuringSpecialEvent(date);
         this.date = date;
     }
 
@@ -26,33 +20,21 @@ public class ReservationDate {
         }
     }
 
-    private boolean checkDuringDDayEvent(int date) {
-        return date >= Constants.D_DAY_START_DATE && date <= Constants.D_DAY_END_DATE;
+    public boolean checkDuringDDayEvent() {
+        return this.date >= Constants.D_DAY_START_DATE && this.date <= Constants.D_DAY_END_DATE;
     }
 
-    private boolean checkWeekend(int date) {
-        DayOfWeek dayOfWeek = LocalDate.of(Constants.YEAR, Constants.MONTH, date).getDayOfWeek();
+    public boolean checkWeekend() {
+        DayOfWeek dayOfWeek = LocalDate.of(Constants.YEAR, Constants.MONTH, this.date).getDayOfWeek();
         return dayOfWeek == DayOfWeek.FRIDAY || dayOfWeek == DayOfWeek.SATURDAY;
     }
 
-    private boolean checkDuringSpecialEvent(int date) {
+    public boolean checkDuringSpecialEvent() {
         SpecialEventDates specialEventDates = new SpecialEventDates();
-        return specialEventDates.contains(date);
+        return specialEventDates.contains(this.date);
     }
 
     public int getDate() {
         return this.date;
-    }
-
-    public boolean getIsDuringDDayEvent() {
-        return this.isDuringDDayEvent;
-    }
-
-    public boolean getIsWeekend() {
-        return this.isWeekend;
-    }
-
-    public boolean getIsDuringSpecialEvent() {
-        return this.isDuringSpecialEvent;
     }
 }

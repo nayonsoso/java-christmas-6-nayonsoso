@@ -31,7 +31,7 @@ class ReservationDateTest {
     @ParameterizedTest
     void checkDuringDDayEventTestExpectingTrue(int date) {
         ReservationDate reservationDate = new ReservationDate(date);
-        assertThat(reservationDate.getIsDuringDDayEvent()).isTrue();
+        assertThat(reservationDate.checkDuringDDayEvent()).isTrue();
     }
 
     @DisplayName("크리스마스 디데이 이벤트 해당되지 않을시 IsDuringDDayEvent 에 false 저장됨")
@@ -39,7 +39,7 @@ class ReservationDateTest {
     @ParameterizedTest
     void checkDuringDDayEventTestExpectingFalse(int date) {
         ReservationDate reservationDate = new ReservationDate(date);
-        assertThat(reservationDate.getIsDuringDDayEvent()).isFalse();
+        assertThat(reservationDate.checkDuringDDayEvent()).isFalse();
     }
 
     @DisplayName("주말일 경우 IsWeekend 에 true 저장됨")
@@ -47,7 +47,7 @@ class ReservationDateTest {
     @ParameterizedTest
     void checkWeekendTestExpectingTrue(int date) {
         ReservationDate reservationDate = new ReservationDate(date);
-        assertThat(reservationDate.getIsWeekend()).isTrue();
+        assertThat(reservationDate.checkWeekend()).isTrue();
     }
 
     @DisplayName("주말 아닐 경우 IsWeekend 에 false 저장됨")
@@ -55,6 +55,6 @@ class ReservationDateTest {
     @ParameterizedTest
     void checkWeekendTestExpectingFalse(int date) {
         ReservationDate reservationDate = new ReservationDate(date);
-        assertThat(reservationDate.getIsWeekend()).isFalse();
+        assertThat(reservationDate.checkWeekend()).isFalse();
     }
 }

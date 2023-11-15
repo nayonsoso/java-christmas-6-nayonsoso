@@ -23,7 +23,7 @@ public class Benefit {
     }
 
     private void addChristmasDDayBenefit(ReservationDate reservationDate) {
-        if (reservationDate.getIsDuringDDayEvent()) {
+        if (reservationDate.checkDuringDDayEvent()) {
             int christmasDDayDiscount = calculateChristmasDDayDiscount(reservationDate.getDate());
             this.benefit.put(EventType.CHRISTMAS_D_DAY, christmasDDayDiscount);
         }
@@ -34,7 +34,7 @@ public class Benefit {
     }
 
     private void addWeekdayBenefit(ReservationDate reservationDate, Orders orders) {
-        if (!reservationDate.getIsWeekend() && orders.countDesserts() != 0) {
+        if (!reservationDate.checkWeekend() && orders.countDesserts() != 0) {
             int weekdayDiscount = calculateWeekDayDiscount(orders);
             this.benefit.put(EventType.WEEKDAY, weekdayDiscount);
         }
@@ -45,7 +45,7 @@ public class Benefit {
     }
 
     private void addWeekendBenefit(ReservationDate reservationDate, Orders orders) {
-        if (reservationDate.getIsWeekend() && orders.countMains() != 0) {
+        if (reservationDate.checkWeekend() && orders.countMains() != 0) {
             int weekendDiscount = calculateWeekendDiscount(orders);
             this.benefit.put(EventType.WEEKEND, weekendDiscount);
         }
@@ -56,7 +56,7 @@ public class Benefit {
     }
 
     private void addSpecialBenefit(ReservationDate reservationDate) {
-        if (reservationDate.getIsDuringSpecialEvent()) {
+        if (reservationDate.checkDuringSpecialEvent()) {
             this.benefit.put(EventType.SPECIAL, Constants.SPECIAL_DISCOUNT);
         }
     }
