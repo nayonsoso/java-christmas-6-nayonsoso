@@ -2,7 +2,9 @@ package christmas.model;
 
 import christmas.constants.Constants;
 
+import java.util.Collections;
 import java.util.EnumMap;
+import java.util.Map;
 
 import static christmas.constants.ErrorMessage.INVALID_ORDER_ERROR;
 
@@ -107,7 +109,7 @@ public class Orders {
                 .sum();
     }
 
-    public EnumMap<Menu, Integer> getOrders() {
-        return this.orders;
+    public Map<Menu, Integer> getOrders() {
+        return Collections.unmodifiableMap(this.orders);
     }
 }

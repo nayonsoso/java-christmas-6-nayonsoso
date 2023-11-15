@@ -2,7 +2,9 @@ package christmas.model;
 
 import christmas.constants.Constants;
 
+import java.util.Collections;
 import java.util.EnumMap;
+import java.util.Map;
 
 public class Benefit {
     private final EnumMap<EventType, Integer> benefit;
@@ -67,8 +69,8 @@ public class Benefit {
         }
     }
 
-    public EnumMap<EventType, Integer> getBenefit() {
-        return this.benefit;
+    public Map<EventType, Integer> getBenefit() {
+        return Collections.unmodifiableMap(this.benefit);
     }
 
     public int getTotalBenefitAmount() {
