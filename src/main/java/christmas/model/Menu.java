@@ -32,8 +32,20 @@ public enum Menu {
 
     public static Optional<Menu> findByName(String input) {
         return Arrays.stream(values())
-                .filter(menu -> input.equals(menu.getName()))
+                .filter(menu -> input.equals(menu.name))
                 .findFirst();
+    }
+
+    public static String getGiftMenuName() {
+        return CHAMPAGNE.name;
+    }
+
+    public static int getGiftMenuQuantity() {
+        return 1;
+    }
+
+    public static int getGiftMenuPrice() {
+        return CHAMPAGNE.price;
     }
 
     public String getName() {
@@ -54,17 +66,5 @@ public enum Menu {
 
     public boolean isMain() {
         return this.menuType == MenuType.MAIN;
-    }
-
-    public static String getGiftMenuName(){
-        return CHAMPAGNE.name;
-    }
-
-    public static int getGiftMenuQuantity(){
-        return 1;
-    }
-
-    public static int getGiftMenuPrice(){
-        return CHAMPAGNE.price;
     }
 }

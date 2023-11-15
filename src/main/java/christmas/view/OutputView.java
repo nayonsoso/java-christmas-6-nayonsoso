@@ -14,13 +14,12 @@ public class OutputView {
 
     private static final String PRICE_BEFORE_DISCOUNT_MESSAGE = "\n<할인 전 총주문 금액>";
     private static final String PRICE_AFTER_DISCOUNT_MESSAGE = "\n<할인 후 예상 결제 금액>";
+    private static final String TOTAL_BENEFIT_AMOUNT_MESSAGE = "\n<총혜택 금액>";
     private static final String PLUS_MONEY_FORMAT = "###,###원";
+    private static final String MINUS_MONEY_FORMAT = "-###,###원";
 
     private static final String BENEFIT_LIST_MESSAGE = "\n<혜택 내역>";
     private static final String BENEFIT_FORMAT = "%s: %s\n";
-
-    private static final String TOTAL_BENEFIT_AMOUNT_MESSAGE = "\n<총혜택 금액>";
-    private static final String MINUS_MONEY_FORMAT = "-###,###원";
 
     private static final String EVENT_BADGE_MESSAGE = "\n<%d월 이벤트 배지>\n";
     private static final String NO_DATA = "없음";
@@ -33,7 +32,7 @@ public class OutputView {
         System.out.println(MENU_START_MESSAGE);
     }
 
-    public static void printMenu(String menu, Integer quantity) {
+    public static void printMenu(String menu, int quantity) {
         System.out.printf(MENU_QUANTITY_FORMAT, menu, quantity);
     }
 
