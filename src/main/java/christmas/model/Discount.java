@@ -71,11 +71,15 @@ public class Discount {
         return this.discount;
     }
 
-    public int getTotalDiscount(){
+    public int getTotalBenefitAmount(){
         return this.discount.values().stream().mapToInt(Integer::intValue).sum();
     }
 
-    public boolean checkGift(){
+    public int getTotalDiscount(){
+        return this.discount.values().stream().mapToInt(Integer::intValue).sum() - Menu.getGiftMenuPrice();
+    }
+
+    public boolean checkGiftIncluded(){
         return this.discount.get(EventType.GIFT) != null;
     }
 }
