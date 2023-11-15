@@ -6,11 +6,11 @@ import christmas.constants.ErrorMessage;
 import java.text.DecimalFormat;
 
 public class OutputView {
-    private static final String EVENT_PREVIEW_MESSAGE = "%d월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
-    private static final String MENU_START_MESSAGE = "<주문 메뉴>";
-    private static final String MENU_QUANTITY_FORMAT = "%s %d개";
-    private static final String PRICE_BEFORE_DISCOUNT_MESSAGE = "<할인 전 총주문 금액>";
-    private static final String GIFT_MENU_MESSAGE = "<증정 메뉴>";
+    private static final String EVENT_PREVIEW_MESSAGE = "%d월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n";
+    private static final String MENU_START_MESSAGE = "\n<주문 메뉴>";
+    private static final String MENU_QUANTITY_FORMAT = "%s %d개\n";
+    private static final String PRICE_BEFORE_DISCOUNT_MESSAGE = "\n<할인 전 총주문 금액>";
+    private static final String GIFT_MENU_MESSAGE = "\n<증정 메뉴>";
     private static final String GIFT_MENU = "샴페인";
     private static final int GIFT_MENU_QUANTITY = 1;
     private static final String BENEFIT_LIST_MESSAGE = "<혜택 내역>";
@@ -21,21 +21,17 @@ public class OutputView {
 
     public static void printEventPreview(int date) {
         System.out.printf(EVENT_PREVIEW_MESSAGE, Constants.MONTH, date);
-        System.out.println();
     }
 
     public static void printMenuStart() {
-        System.out.println();
         System.out.println(MENU_START_MESSAGE);
     }
 
     public static void printMenu(String menu, Integer quantity) {
         System.out.printf(MENU_QUANTITY_FORMAT, menu, quantity);
-        System.out.println();
     }
 
     public static void printPriceBeforeDiscount(int price) {
-        System.out.println();
         System.out.println(PRICE_BEFORE_DISCOUNT_MESSAGE);
         System.out.println(formatWithCommas(price));
     }
