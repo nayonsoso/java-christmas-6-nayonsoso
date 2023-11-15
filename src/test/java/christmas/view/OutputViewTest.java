@@ -28,7 +28,7 @@ class OutputViewTest {
     @DisplayName("주어진 정수를 세 자리마다 쉼표를 찍어 출력한다.")
     void printMoneyTest() {
         int money = 1234567890;
-        OutputView.printPriceBeforeDiscount(money);
+        OutputView.printPaymentAfterDiscount(money);
         assertThat(output.toString()).contains("1,234,567,890원");
     }
 

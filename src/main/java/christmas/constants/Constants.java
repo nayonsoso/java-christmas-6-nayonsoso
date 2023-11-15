@@ -19,8 +19,8 @@ public class Constants {
     public static final int MIN_ORDER_QUANTITY = 1;
     public static final int MAX_ORDER_QUANTITY = 20;
 
-    // Discount
-    public static final int MIN_PAYMENT_TO_DISCOUNT = 10_000;
+    // Benefit
+    public static final int MIN_PAYMENT_TO_GET_BENEFIT = 10_000;
     public static final int SPECIAL_DISCOUNT = 1_000;
 
     // Gift

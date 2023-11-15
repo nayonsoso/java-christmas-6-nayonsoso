@@ -73,7 +73,7 @@ class OrdersTest {
         int totalPrice = Menu.MUSHROOM_SOUP.getPrice() + Menu.T_BONE_STEAK.getPrice() * 2
                 + Menu.CHOCOLATE_CAKE.getPrice() * 3 + Menu.RED_WINE.getPrice() * 4;
         Orders orders = new Orders(userInput);
-        assertThat(orders.getTotalPrice()).isEqualTo(totalPrice);
+        assertThat(orders.getTotalPayment()).isEqualTo(totalPrice);
     }
 
     @DisplayName("디저트 수 계산 테스트")

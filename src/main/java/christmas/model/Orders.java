@@ -85,7 +85,7 @@ public class Orders {
         return orders.values().stream().mapToInt(Integer::intValue).sum();
     }
 
-    public int getTotalPrice() {
+    public int getTotalPayment() {
         return this.orders.entrySet().stream()
                 .mapToInt(entry -> entry.getKey().getPrice() * entry.getValue())
                 .sum();

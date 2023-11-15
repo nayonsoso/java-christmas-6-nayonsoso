@@ -12,8 +12,8 @@ public class OutputView {
     private static final String GIFT_MENU_MESSAGE = "\n<증정 메뉴>";
     private static final String MENU_QUANTITY_FORMAT = "%s %d개\n";
 
-    private static final String PRICE_BEFORE_DISCOUNT_MESSAGE = "\n<할인 전 총주문 금액>";
-    private static final String PRICE_AFTER_DISCOUNT_MESSAGE = "\n<할인 후 예상 결제 금액>";
+    private static final String PAYMENT_BEFORE_DISCOUNT_MESSAGE = "\n<할인 전 총주문 금액>";
+    private static final String PAYMENT_AFTER_DISCOUNT_MESSAGE = "\n<할인 후 예상 결제 금액>";
     private static final String TOTAL_BENEFIT_AMOUNT_MESSAGE = "\n<총혜택 금액>";
     private static final String PLUS_MONEY_FORMAT = "###,###원";
     private static final String MINUS_MONEY_FORMAT = "-###,###원";
@@ -36,9 +36,9 @@ public class OutputView {
         System.out.printf(MENU_QUANTITY_FORMAT, menu, quantity);
     }
 
-    public static void printPriceBeforeDiscount(int price) {
-        System.out.println(PRICE_BEFORE_DISCOUNT_MESSAGE);
-        System.out.println(formatWithCommas(price));
+    public static void printPaymentBeforeDiscount(int payment) {
+        System.out.println(PAYMENT_BEFORE_DISCOUNT_MESSAGE);
+        System.out.println(formatWithCommas(payment));
     }
 
     public static void printGiftMenuStartMessage() {
@@ -53,11 +53,11 @@ public class OutputView {
         System.out.println(NO_DATA);
     }
 
-    public static void printBenefitListStartMessage() {
+    public static void printBenefitStartMessage() {
         System.out.println(BENEFIT_LIST_MESSAGE);
     }
 
-    public static void printBenefitList(String event, int discount) {
+    public static void printBenefit(String event, int discount) {
         System.out.printf(BENEFIT_FORMAT, event, formatMinusWithCommas(discount));
     }
 
@@ -69,9 +69,9 @@ public class OutputView {
         System.out.println(formatMinusWithCommas(totalBenefit));
     }
 
-    public static void printAfterDiscount(int priceAfterDiscount) {
-        System.out.println(PRICE_AFTER_DISCOUNT_MESSAGE);
-        System.out.println(formatWithCommas(priceAfterDiscount));
+    public static void printPaymentAfterDiscount(int paymentAfterDiscount) {
+        System.out.println(PAYMENT_AFTER_DISCOUNT_MESSAGE);
+        System.out.println(formatWithCommas(paymentAfterDiscount));
     }
 
     public static void printEventBadgeStartMessage() {

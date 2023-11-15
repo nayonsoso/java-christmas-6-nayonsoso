@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class DiscountTest {
+class BenefitTest {
 
     private static final int christmasDiscountAt2 = Constants.D_DAY_START_DISCOUNT + Constants.D_DAY_ACCUMULATED_DISCOUNT;
     private static final int christmasDiscountAt3 = Constants.D_DAY_START_DISCOUNT + Constants.D_DAY_ACCUMULATED_DISCOUNT * 2;
@@ -68,9 +68,17 @@ class DiscountTest {
     void reservationDateTest(String type, int date, String order, List<EventType> events, int expectedBenefit, boolean isGiftIncluded) {
         ReservationDate reservationDate = new ReservationDate(date);
         Orders orders = new Orders(order);
-        Discount discount = new Discount(reservationDate, orders);
-        assertThat(discount.getDiscount().keySet()).containsExactlyInAnyOrderElementsOf(events);
-        assertThat(discount.getTotalBenefitAmount()).isEqualTo(expectedBenefit);
-        assertThat(discount.checkGiftIncluded()).isEqualTo(isGiftIncluded);
+        Benefit benefit = new Benefit(reservationDate, orders);
+
+        assertThat(benefit.getBenefit().keySet()).containsExactlyInAnyOrderElementsOf(events);
+        assertThat(benefit.getTotalBenefitAmount()).isEqualTo(expectedBenefit);
+        assertThat(benefit.checkGiftIncluded()).isEqualTo(isGiftIncluded);
+        assertThat(benefit.checkAnyEventIncluded()).isEqualTo(events.size() != 0);
+        if (benefit.checkGiftIncluded()) {
+            assertThat(benefit.getTotalDiscountAmount()).isEqualTo(expectedBenefit - 25_000);
+        }
+        if (!benefit.checkGiftIncluded()) {
+            assertThat(benefit.getTotalDiscountAmount()).isEqualTo(expectedBenefit);
+        }
     }
 }

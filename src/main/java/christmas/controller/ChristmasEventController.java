@@ -9,16 +9,16 @@ public class ChristmasEventController {
     public void run() {
         ReservationDate reservationDate = initDate();
         Orders orders = initOrder();
-        Discount discount = initDiscount(reservationDate, orders);
+        Benefit benefit = initBenefit(reservationDate, orders);
 
         printEventPreview(reservationDate);
         printOrderedMenus(orders);
-        printPriceBeforeDiscount(orders);
-        printGiftMenu(discount);
-        printBenefitList(discount);
-        printTotalBenefit(discount);
-        printAfterDiscount(orders, discount);
-        printEventBadge(discount);
+        printPaymentBeforeDiscount(orders);
+        printGiftMenu(benefit);
+        printBenefitList(benefit);
+        printTotalBenefit(benefit);
+        printAfterDiscount(orders, benefit);
+        printEventBadge(benefit);
     }
 
     private ReservationDate initDate() {
@@ -41,8 +41,8 @@ public class ChristmasEventController {
         }
     }
 
-    private Discount initDiscount(ReservationDate date, Orders orders) {
-        return new Discount(date, orders);
+    private Benefit initBenefit(ReservationDate date, Orders orders) {
+        return new Benefit(date, orders);
     }
 
     private void printEventPreview(ReservationDate date) {
@@ -54,44 +54,44 @@ public class ChristmasEventController {
         orders.getOrders().forEach((key, value) -> OutputView.printMenu(key.getName(), value));
     }
 
-    private void printPriceBeforeDiscount(Orders orders) {
-        OutputView.printPriceBeforeDiscount(orders.getTotalPrice());
+    private void printPaymentBeforeDiscount(Orders orders) {
+        OutputView.printPaymentBeforeDiscount(orders.getTotalPayment());
     }
 
-    private void printGiftMenu(Discount discount) {
+    private void printGiftMenu(Benefit benefit) {
         OutputView.printGiftMenuStartMessage();
-        if (discount.checkGiftIncluded()) {
+        if (benefit.checkGiftIncluded()) {
             OutputView.printGiftMenu(Menu.getGiftMenuName(), Menu.getGiftMenuQuantity());
         }
-        if (!discount.checkGiftIncluded()) {
+        if (!benefit.checkGiftIncluded()) {
             OutputView.printNoDataMessage();
         }
     }
 
-    private void printBenefitList(Discount discount) {
-        OutputView.printBenefitListStartMessage();
-        if (discount.checkAnyEventIncluded()) {
-            discount.getDiscount().forEach((key, value) -> OutputView.printBenefitList(key.getName(), value));
+    private void printBenefitList(Benefit benefit) {
+        OutputView.printBenefitStartMessage();
+        if (benefit.checkAnyEventIncluded()) {
+            benefit.getBenefit().forEach((key, value) -> OutputView.printBenefit(key.getName(), value));
         }
-        if (!discount.checkAnyEventIncluded()) {
+        if (!benefit.checkAnyEventIncluded()) {
             OutputView.printNoDataMessage();
         }
     }
 
-    private void printTotalBenefit(Discount discount) {
+    private void printTotalBenefit(Benefit benefit) {
         OutputView.printTotalBenefitStartMessage();
-        OutputView.printTotalBenefit(discount.getTotalBenefitAmount());
+        OutputView.printTotalBenefit(benefit.getTotalBenefitAmount());
     }
 
-    private void printAfterDiscount(Orders orders, Discount discount) {
-        OutputView.printAfterDiscount(orders.getTotalPrice() - discount.getTotalDiscount());
+    private void printAfterDiscount(Orders orders, Benefit benefit) {
+        OutputView.printPaymentAfterDiscount(orders.getTotalPayment() - benefit.getTotalDiscountAmount());
     }
 
-    private void printEventBadge(Discount discount) {
+    private void printEventBadge(Benefit benefit) {
         OutputView.printEventBadgeStartMessage();
-        String badgeName = Badge.getBadgeFor(discount.getTotalBenefitAmount());
+        String badgeName = Badge.getBadgeFor(benefit.getTotalBenefitAmount());
         if (badgeName != null) {
-            OutputView.printEventBadge(Badge.getBadgeFor(discount.getTotalBenefitAmount()));
+            OutputView.printEventBadge(Badge.getBadgeFor(benefit.getTotalBenefitAmount()));
         }
         if (badgeName == null) {
             OutputView.printNoDataMessage();
