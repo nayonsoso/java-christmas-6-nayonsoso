@@ -17,15 +17,15 @@ public class Orders {
         this.orders = orders;
     }
 
+    private String removeWhiteSpace(String userInput) {
+        return userInput.replace(" ", "");
+    }
+
     private void validateFormat(String inputOrder) {
         String regex = "^[가-힣]+(-\\d+)(,[가-힣]+(-\\d+))*$";
         if (!inputOrder.matches(regex)) {
             throw new IllegalArgumentException(INVALID_ORDER_ERROR);
         }
-    }
-
-    private String removeWhiteSpace(String userInput) {
-        return userInput.replace(" ", "");
     }
 
     private EnumMap<Menu, Integer> initOrder(String userInput) {
@@ -85,16 +85,10 @@ public class Orders {
         return orders.values().stream().mapToInt(Integer::intValue).sum();
     }
 
-    public EnumMap<Menu, Integer> getOrders() {
-        return this.orders;
-    } //TODO: 이거 없애기
-
     public int getTotalPrice() {
-        int sum = 0;
-        for (Menu menu : this.orders.keySet()) {
-            sum += menu.getPrice() * this.orders.get(menu);
-        }
-        return sum;
+        return this.orders.entrySet().stream()
+                .mapToInt(entry -> entry.getKey().getPrice() * entry.getValue())
+                .sum();
     }
 
     public int countDesserts() {
@@ -111,5 +105,9 @@ public class Orders {
                 .map(e -> this.orders.get(e))
                 .mapToInt(Integer::intValue)
                 .sum();
+    }
+
+    public EnumMap<Menu, Integer> getOrders() {
+        return this.orders;
     }
 }
