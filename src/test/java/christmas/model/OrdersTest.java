@@ -18,9 +18,11 @@ class OrdersTest {
         return Stream.of(
                 Arguments.of("메뉴만", "양송이수프"),
                 Arguments.of("숫자만", "-1"),
+                Arguments.of("대쉬로 끝남", "양송이수프-"),
                 Arguments.of("쉼표로 끝남", "양송이수프-1,"),
-                Arguments.of("메뉴판에 없는 주문", "양송이수프프-하나"),
+                Arguments.of("메뉴판에 없는 주문", "양송이수프프-1"),
                 Arguments.of("최소 주문 수 미만 주문", "양송이수프-0"),
+                Arguments.of("숫자가 아닌 수로 주문", "양송이수프-하나요"),
                 Arguments.of("중복된 주문", "양송이스프-1, 양송이수프-2"),
                 Arguments.of("음료만 주문", "제로콜라-1, 레드와인-2"),
                 Arguments.of("최대 주문 수 초과 주문", "양송이수프-20, 레드와인-1")
@@ -30,7 +32,7 @@ class OrdersTest {
     static Stream<Arguments> validOrders() throws Throwable {
         return Stream.of(
                 Arguments.of("하나만", "양송이수프-10"),
-                Arguments.of("둘 이상", "양송이수프-2, 레드와인-1"),
+                Arguments.of("둘 이상", "양송이수프-2, 레드와인-1, 시저샐러드-3"),
                 Arguments.of("최소 주문", "양송이수프-1"),
                 Arguments.of("최대 주문", "양송이수프-19, 레드와인-1")
         );
