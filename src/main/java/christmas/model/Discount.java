@@ -10,7 +10,7 @@ public class Discount {
     public Discount(ReservationDate reservationDate, Orders orders) {
         this.discount = new EnumMap<>(EventType.class);
         if (checkPossibleToDiscount(orders)) {
-            addChristmasDiscount(reservationDate);
+            addChristmasDDayDiscount(reservationDate);
             addWeekdayDiscount(reservationDate, orders);
             addWeekendDiscount(reservationDate, orders);
             addSpecialDiscount(reservationDate);
@@ -22,14 +22,14 @@ public class Discount {
         return orders.getTotalPrice() >= Constants.MIN_PAYMENT_TO_DISCOUNT;
     }
 
-    private void addChristmasDiscount(ReservationDate reservationDate) {
+    private void addChristmasDDayDiscount(ReservationDate reservationDate) {
         if (reservationDate.getIsDuringDDayEvent()) {
-            int christmasDiscount = calculateChristmasDiscount(reservationDate.getDate());
-            this.discount.put(EventType.CHRISTMAS_D_DAY, christmasDiscount);
+            int christmasDDayDiscount = calculateChristmasDDayDiscount(reservationDate.getDate());
+            this.discount.put(EventType.CHRISTMAS_D_DAY, christmasDDayDiscount);
         }
     }
 
-    private int calculateChristmasDiscount(int date) {
+    private int calculateChristmasDDayDiscount(int date) {
         return (date - 1) * Constants.D_DAY_ACCUMULATED_DISCOUNT + Constants.D_DAY_START_DISCOUNT;
     }
 
@@ -67,24 +67,24 @@ public class Discount {
         }
     }
 
-    public EnumMap<EventType, Integer> getDiscount(){
+    public EnumMap<EventType, Integer> getDiscount() {
         return this.discount;
     }
 
-    public int getTotalBenefitAmount(){
+    public int getTotalBenefitAmount() {
         return this.discount.values().stream().mapToInt(Integer::intValue).sum();
     }
 
-    public int getTotalDiscount(){
+    public int getTotalDiscount() {
         return this.discount.values().stream().mapToInt(Integer::intValue).sum()
-                - Menu.getGiftMenuPrice() * Menu.getGiftMenuQuantity();
+                - (Menu.getGiftMenuPrice() * Menu.getGiftMenuQuantity());
     }
 
-    public boolean checkAnyEventIncluded(){
+    public boolean checkAnyEventIncluded() {
         return this.discount.size() != 0;
     }
 
-    public boolean checkGiftIncluded(){
+    public boolean checkGiftIncluded() {
         return this.discount.get(EventType.GIFT) != null;
     }
 }
