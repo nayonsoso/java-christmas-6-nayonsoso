@@ -56,11 +56,15 @@ public enum Menu {
         return this.menuType == MenuType.MAIN;
     }
 
-    public static int getGiftMenuPrice(){
-        return CHAMPAGNE.price;
-    }
-
     public static String getGiftMenuName(){
         return CHAMPAGNE.name;
+    }
+
+    public static int getGiftMenuQuantity(){
+        return 1;
+    }
+
+    public static int getGiftMenuPrice(){
+        return CHAMPAGNE.price;
     }
 }
