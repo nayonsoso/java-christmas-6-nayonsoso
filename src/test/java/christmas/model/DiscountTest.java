@@ -65,12 +65,12 @@ class DiscountTest {
     @DisplayName("할인 내역 저장 정상 작동 테스트")
     @ParameterizedTest(name = "주문 유형 : {0}")
     @MethodSource("reservationDateAndOrders")
-    void reservationDateTest(String type, int date, String order, List<EventType> events, int expectedDiscount, boolean isGiftIncluded) {
+    void reservationDateTest(String type, int date, String order, List<EventType> events, int expectedBenefit, boolean isGiftIncluded) {
         ReservationDate reservationDate = new ReservationDate(date);
         Orders orders = new Orders(order);
         Discount discount = new Discount(reservationDate, orders);
         assertThat(discount.getDiscount().keySet()).containsExactlyInAnyOrderElementsOf(events);
-        assertThat(discount.getTotalDiscount()).isEqualTo(expectedDiscount);
+        assertThat(discount.getTotalBenefitAmount()).isEqualTo(expectedBenefit);
         assertThat(discount.checkGiftIncluded()).isEqualTo(isGiftIncluded);
     }
 }
