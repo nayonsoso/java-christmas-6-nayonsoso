@@ -18,7 +18,7 @@ class BenefitTest {
     private static final int christmasDiscountAt4 = Constants.D_DAY_START_DISCOUNT + Constants.D_DAY_ACCUMULATED_DISCOUNT * 3;
     private static final int giftPrice = Menu.getGiftMenuPrice();
 
-    static Stream<Arguments> reservationDateAndOrders() throws Throwable {
+    static Stream<Arguments> reservationDateAndOrders() {
         return Stream.of(
                 Arguments.of("할인받기 위한 금액 미만", 2, "타파스-1", List.of(), 0, false),
                 // 크리스마스 디데이 이벤트 중

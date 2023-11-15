@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class OrdersTest {
-    static Stream<Arguments> invalidOrders() throws Throwable {
+    static Stream<Arguments> invalidOrders() {
         return Stream.of(
                 Arguments.of("메뉴만", "양송이수프"),
                 Arguments.of("숫자만", "-1"),
@@ -29,7 +29,7 @@ class OrdersTest {
         );
     }
 
-    static Stream<Arguments> validOrders() throws Throwable {
+    static Stream<Arguments> validOrders() {
         return Stream.of(
                 Arguments.of("하나만", "양송이수프-10"),
                 Arguments.of("둘 이상", "양송이수프-2, 레드와인-1, 시저샐러드-3"),
