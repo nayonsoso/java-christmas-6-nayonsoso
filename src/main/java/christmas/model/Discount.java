@@ -79,6 +79,10 @@ public class Discount {
         return this.discount.values().stream().mapToInt(Integer::intValue).sum() - Menu.getGiftMenuPrice();
     }
 
+    public boolean checkAnyEventIncluded(){
+        return this.discount.size() != 0;
+    }
+
     public boolean checkGiftIncluded(){
         return this.discount.get(EventType.GIFT) != null;
     }
