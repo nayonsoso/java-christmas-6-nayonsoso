@@ -20,7 +20,7 @@ class InputViewTest {
         InputStream in = new ByteArrayInputStream("숫자 아님".getBytes());
         System.setIn(in);
 
-        assertThatThrownBy(InputView::readDate)
+        assertThatThrownBy(() -> InputView.readDateOn(12))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.INVALID_DATE_ERROR);
     }
