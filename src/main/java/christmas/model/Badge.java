@@ -6,21 +6,21 @@ public enum Badge {
     SANTA("산타", 20_000);
 
     private final String name;
-    private final int minDiscount;
+    private final int minBenefitAmount;
 
-    Badge(String name, int minDiscount){
+    Badge(String name, int minBenefitAmount){
         this.name = name;
-        this.minDiscount = minDiscount;
+        this.minBenefitAmount = minBenefitAmount;
     }
 
-    public static String getBadgeFor(int totalDiscount){
-        if(totalDiscount < STAR.minDiscount){
+    public static String getBadgeFor(int totalBenefitAmount){
+        if(totalBenefitAmount < STAR.minBenefitAmount){
             return null;
         }
-        if(totalDiscount < TREE.minDiscount){
+        if(totalBenefitAmount < TREE.minBenefitAmount){
             return STAR.name;
         }
-        if(totalDiscount < SANTA.minDiscount){
+        if(totalBenefitAmount < SANTA.minBenefitAmount){
             return TREE.name;
         }
         return SANTA.name;
