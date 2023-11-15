@@ -25,7 +25,7 @@ class OutputViewTest {
     }
 
     @Test
-    @DisplayName("주어진 정수를 세 자리마다 쉼표를 찍어 출력한다.")
+    @DisplayName("주어진 정수에 세 자리마다 쉼표를 찍어 출력")
     void printMoneyTest() {
         int money = 1234567890;
         OutputView.printPaymentAfterDiscount(money);
@@ -33,10 +33,18 @@ class OutputViewTest {
     }
 
     @Test
-    @DisplayName("주어진 정수를 세 자리마다 쉼표를 찍어 출력하며, 맨 앞에 -를 붙인다.")
+    @DisplayName("주어진 정수에 세 자리마다 쉼표를 찍어 출력, 맨 앞에 -를 붙임")
     void printMinusMoneyTest() {
         int money = 1234567890;
         OutputView.printTotalBenefit(money);
         assertThat(output.toString()).contains("-1,234,567,890원");
+    }
+
+    @Test
+    @DisplayName("혜택 금액이 0원인 경우 -없이 출력")
+    void printZeroBenefitTest() {
+        int money = 0;
+        OutputView.printTotalBenefit(money);
+        assertThat(output.toString()).contains("0원");
     }
 }
