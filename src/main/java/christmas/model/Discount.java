@@ -14,7 +14,7 @@ public class Discount {
             addWeekdayDiscount(reservationDate, orders);
             addWeekendDiscount(reservationDate, orders);
             addSpecialDiscount(reservationDate);
-            addSpecialDiscount(orders);
+            addGiftDiscount(orders);
         }
     }
 
@@ -61,7 +61,7 @@ public class Discount {
         }
     }
 
-    private void addSpecialDiscount(Orders orders) {
+    private void addGiftDiscount(Orders orders) {
         if (orders.getTotalPrice() >= Constants.MIN_PAYMENT_TO_GET_GIFT) {
             this.discount.put(EventType.GIFT, Menu.getGiftMenuPrice());
         }
@@ -73,5 +73,9 @@ public class Discount {
 
     public int getTotalDiscount(){
         return this.discount.values().stream().mapToInt(Integer::intValue).sum();
+    }
+
+    public boolean checkGift(){
+        return this.discount.get(EventType.GIFT) != null;
     }
 }
