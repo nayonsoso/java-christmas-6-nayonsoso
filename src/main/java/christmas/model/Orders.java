@@ -7,7 +7,7 @@ import java.util.EnumMap;
 import static christmas.constants.ErrorMessage.INVALID_ORDER_ERROR;
 
 public class Orders {
-    EnumMap<Menu, Integer> orders;
+    private final EnumMap<Menu, Integer> orders;
 
     public Orders(String userInput) {
         String input = removeWhiteSpace(userInput);
